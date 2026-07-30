@@ -14,14 +14,6 @@ This repository is the clean-history public distribution of SPHINX. For a note
 on how updates are prepared, see
 [`RELEASE_SYNC.md`](RELEASE_SYNC.md) for the update boundary and release policy.
 
-I built SPHINX around a simple research habit: make the numerical choices
-explicit, keep the solver honest about what it has actually tested, and leave
-enough of a trail that another person can follow. Research software tends to
-grow a small bureaucracy of defaults, warnings, and mysterious checkboxes, so
-the project tries to keep that bureaucracy legible. It is meant to be used,
-questioned, and improved. That is generally more useful than admiring it as a
-black box.
-
 ## Download MATLAB or Python
 
 The [GitHub Releases page](https://github.com/jmmolina113/SPHINX/releases) has
