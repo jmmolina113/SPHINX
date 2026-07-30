@@ -1,0 +1,45 @@
+name: Build MATLAB and Python downloads
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify certified numerical-core manifest
+        run: |
+          release="$(python -c 'import json; print(json.load(open("SPHINX_CORE_MANIFEST.json"))["release"])')"
+          python tools/generate_core_manifest.py --release "$release" --output /tmp/SPHINX_CORE_MANIFEST.json
+          diff -u SPHINX_CORE_MANIFEST.json /tmp/SPHINX_CORE_MANIFEST.json
+      - name: Build separate downloads
+        run: python tools/build_distributions.py
+      - name: Upload downloadable artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: SPHINX-downloads
+          path: |
+            dist/SPHINX-MATLAB.zip
+            dist/SPHINX-Python.zip
+            dist/SHA256SUMS.txt
+          compression-level: 0
+      - name: Attach downloads to tagged release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" dist/SPHINX-MATLAB.zip dist/SPHINX-Python.zip dist/SHA256SUMS.txt --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" dist/SPHINX-MATLAB.zip dist/SPHINX-Python.zip dist/SHA256SUMS.txt --generate-notes --title "SPHINX $GITHUB_REF_NAME"
+          fi

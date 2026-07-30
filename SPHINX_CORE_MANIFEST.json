@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "product": "SPHINX",
+  "release": "v0.1.0",
+  "classification": "SPHINX-CERTIFIED",
+  "coreFiles": [
+    {
+      "path": "matlabSolver/M_em_v2.m",
+      "sha256": "47dc3bdbc18fd71965fa94a2bd972e64ed14648f7ea59e391214a6d41a3046cc"
+    },
+    {
+      "path": "matlabSolver/M_qm_electromagneticFields_v3.m",
+      "sha256": "b5e50726d79fa46c233a53968b77c1eb0f29d843979239e19fd5e0ad5b5f4c04"
+    },
+    {
+      "path": "matlabSolver/M_qm_quantumFields_v3.m",
+      "sha256": "261d6c97b743645ce3b8fb1c47da0c7ef275303618db87e2612cb37d412a7539"
+    },
+    {
+      "path": "matlabSolver/calculateJ.m",
+      "sha256": "67d07e0e028f034e66351bb92c595bb385c5c6e0d0b9f240b948a3094a3e55be"
+    },
+    {
+      "path": "matlabSolver/curlOperator_v3.m",
+      "sha256": "80e4a4b062868c6673df88fd5907dc1fb1261cabe4f3736bbb32ee254030e605"
+    },
+    {
+      "path": "matlabSolver/displayIntialization.m",
+      "sha256": "35980012bb9e4f44e73519fe7b36f0517740448bc9a24cb65623c3151dd01295"
+    },
+    {
+      "path": "matlabSolver/fixedBoundaryCurlCurlOperator_2D.m",
+      "sha256": "f3c1c0961fe3a3d4da925664c63f7afbf1174667426e0d6406fc54f82c2aa54a"
+    },
+    {
+      "path": "matlabSolver/fixedBoundaryCurlOperator_2D.m",
+      "sha256": "fb611efcc9b8cef74279eab4005e74027c99d2033ca84c60460c37d3c6a7859d"
+    },
+    {
+      "path": "matlabSolver/flattenFields.m",
+      "sha256": "e6579e29343be894bbf4a05901eae4f78c6498ed430514c4fd12bf5427799e00"
+    },
+    {
+      "path": "matlabSolver/gradientOperator_v3.m",
+      "sha256": "694888a04ad7f38ab776f642749af83c9f6d6f8a43ca8ea86e534ad921e147fc"
+    },
+    {
+      "path": "matlabSolver/importDifferentialOperators.m",
+      "sha256": "2a7e8b2fcb2aa7a01c0ed70dfbde17aacb9cc52fab19f81e1c43ceca663ffc8f"
+    },
+    {
+      "path": "matlabSolver/importParams_phys.m",
+      "sha256": "a5295d6dd9198196e40bb1850f989b97d55eb03b334a2add70a754dd7a5e2e05"
+    },
+    {
+      "path": "matlabSolver/importParams_sim.m",
+      "sha256": "ba2d8fdeb39ef1ca1254fa188c3fc2672bd861121084314fc96166a8f6973978"
+    },
+    {
+      "path": "matlabSolver/laplacianOperator_v3.m",
+      "sha256": "f3cacfe8fbd2cefbb73659286bc1b970f197416cec4ac93fe1bd3c59b1a54200"
+    },
+    {
+      "path": "matlabSolver/makeHmatrix_v4.m",
+      "sha256": "afcb1236e541aa988d75a00d445d0c2eea30ae27426aa98f96f913a2822f0f1f"
+    },
+    {
+      "path": "matlabSolver/saveTimeStep.m",
+      "sha256": "9e58b3d6c1add7f21e9e38fa7b64cdb195a3dabc7ba31d6e08b077642463b3f2"
+    },
+    {
+      "path": "matlabSolver/schrodingerMaxwellSolver_v16.m",
+      "sha256": "dc8551a9b0fd78b8ede038014819ac8f71dc9ec4dce3af169a7c1d78575b997e"
+    },
+    {
+      "path": "matlabSolver/writeSimParamsToFile.m",
+      "sha256": "0a9fd6aaca4bb442e34414204800c497c0b63363488f1da3e3a0acde9edbeefd"
+    },
+    {
+      "path": "python/src/sphinx_solver/model.py",
+      "sha256": "65f7db643b84e80e456dc4274833f27e9c1b692efd7b1805a054ecf5fc8b42eb"
+    },
+    {
+      "path": "python/src/sphinx_solver/operators.py",
+      "sha256": "4f9aa91b57b7b491ad7e0a5ae8cdcb350be813dab836fc5373c6702e4d46259a"
+    },
+    {
+      "path": "python/src/sphinx_solver/ordering.py",
+      "sha256": "6f6537e03a2aa3b2fd485a79a7c8e604eec9ffc5881f49254cb40cf021ce2446"
+    },
+    {
+      "path": "python/src/sphinx_solver/solver.py",
+      "sha256": "2eab3467088f15102f49d0ffb4ef560717df406ee751baaa959a67040284c2f1"
+    }
+  ]
+}

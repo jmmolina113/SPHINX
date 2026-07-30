@@ -1,0 +1,9 @@
+# Numerical core and its integrity boundary require canonical-owner review.
+/matlabSolver/ @jmmolina113
+/python/src/sphinx_solver/model.py @jmmolina113
+/python/src/sphinx_solver/operators.py @jmmolina113
+/python/src/sphinx_solver/ordering.py @jmmolina113
+/python/src/sphinx_solver/solver.py @jmmolina113
+/SPHINX_CORE_MANIFEST.json @jmmolina113
+/tools/generate_core_manifest.py @jmmolina113
+/.github/CODEOWNERS @jmmolina113

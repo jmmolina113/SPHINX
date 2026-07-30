@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible SPHINX simulation or post-production problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping improve SPHINX. Please remove private run data before attaching files.
+  - type: input
+    id: matlab
+    attributes:
+      label: MATLAB version
+      placeholder: R2025b
+    validations:
+      required: true
+  - type: dropdown
+    id: subsystem
+    attributes:
+      label: Area
+      options:
+        - Simulation configuration
+        - Numerical solver
+        - Saved output or manifest
+        - Post-production import
+        - Diagnostics, plot, or movie
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Include the smallest problem definition or MATLAB commands that reproduce the issue.
+      render: matlab
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed and expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Solver diagnostics or error output
+      description: Include result.status, result.solver, or the complete MATLAB error where applicable.
+      render: text
