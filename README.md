@@ -10,9 +10,44 @@
   fixed-boundary operator supports two dimensions.
 </p>
 
-This repository is the clean-history public distribution of SPHINX. For a note
-on how updates are prepared, see
-[`RELEASE_SYNC.md`](RELEASE_SYNC.md) for the update boundary and release policy.
+SPHINX implements the structure-preserving algorithms developed in our study of
+self-consistent electron radiation reaction with the coupled
+Schrödinger-Maxwell system. The repository supports both the research examples
+from that work and more general user-defined fields, grids, coefficients, and
+initial conditions.
+
+## Research context
+
+The coupled system evolves a quantum wavefunction together with its dynamical
+electromagnetic field. The numerical maps are constructed to preserve the
+geometric structure of the semi-discrete system, including symplecticity and
+the unitary quantum evolution associated with the Cayley update. We use operator
+splitting to compose the electromagnetic and quantum subflows.
+
+In the published cyclotron examples, a coherent electron state begins in a
+uniform magnetic field and evolves self-consistently with the radiation it
+produces. SPHINX follows the transfer of energy between the quantum and
+electromagnetic subsystems together with the changing probability distribution
+and perturbed magnetic field.
+
+<p align="center">
+  <img src="assets/publications/sphinx-coupled-dynamics.png"
+       alt="Coupled SPHINX evolution of electron probability density and perturbed magnetic field"
+       width="520">
+</p>
+
+<p align="center"><em>
+  Coupled evolution of the coherent-state probability density and perturbed
+  magnetic field over six cyclotron periods. Figure 3 of Molina and Qin (2026).
+</em></p>
+
+The associated manuscript derives the maps and discusses coherent-state and
+Landau-level simulations in detail:
+
+- J. M. Molina and H. Qin, “Self-Consistent Dynamics of Electron Radiation
+  Reaction via Structure-Preserving Geometric Algorithms for Coupled
+  Schrödinger-Maxwell Systems,” [arXiv:2602.17429](https://arxiv.org/abs/2602.17429)
+  (2026).
 
 ## Download MATLAB or Python
 
@@ -27,21 +62,21 @@ The repository keeps both implementations together so the cross-language
 equivalence tests remain reproducible. Each release archive is separate, so
 you can download only the one you plan to use.
 
-## Certified core and editable analysis
+## Numerical core and editable analysis
 
-SPHINX keeps the numerical core separate from analysis and problem setup. You
+SPHINX keeps the numerical core separate from analysis and problem setup. Users
 can adapt analysis scripts, plots, initial conditions, parameters, and
-post-production without changing the certified solver.
+post-production without changing the solver itself.
 
-Every run checks the numerical core against `SPHINX_CORE_MANIFEST.json` and
-records `SPHINX-CERTIFIED`, `SPHINX-MODIFIED`, or `SPHINX-UNVERIFIED` in the
-manifest and result. A modified core can still be useful research software;
-its outputs just should not be presented as results from the official SPHINX
-numerical core. See [the name and provenance policy](TRADEMARKS.md).
+For reproducibility, each run compares the numerical files with
+`SPHINX_CORE_MANIFEST.json` and records `SPHINX-CERTIFIED`,
+`SPHINX-MODIFIED`, or `SPHINX-UNVERIFIED` in its result. These labels make it
+easy to distinguish the distributed solver from a locally modified version.
+See [the name and provenance policy](TRADEMARKS.md).
 
 SPHINX is distributed under the [Apache License 2.0](LICENSE). The license
-permits use, study, modification, and redistribution. The separate provenance
-policy covers claims that a derivative is an official SPHINX release.
+permits use, study, modification, and redistribution. The accompanying
+provenance policy explains how the SPHINX name is used for modified versions.
 
 ## Run SPHINX in sixty seconds
 
@@ -53,17 +88,17 @@ setupSPHINX
 SPHINX_demo
 ```
 
-The demo runs a small validated 2D example, imports the saved fields, computes
+The demo runs a small 2D example, imports the saved fields, computes
 probability and Hamiltonian diagnostics, and writes a diagnostic CSV under
-`output/`. Figures and movies can be selected afterward, when you actually
-want them.
+`output/`. Figures and movies can then be selected from the post-production
+options.
 
 Nothing is installed globally, and there are no absolute paths to edit.
 
 ## Configure your own simulation
 
 The plain-language interface is the easiest place to start. The bundled
-`cyclotron` preset is one example problem, not the whole point of the solver:
+`cyclotron` preset provides one example problem:
 
 ```matlab
 sim = sphinx.configure("cyclotron", ...
@@ -107,8 +142,7 @@ If you prefer a form with one clearly marked edit block, use
 
 ## Analyze a completed run
 
-Post-production is split into three fairly ordinary steps: import, analysis,
-and product selection:
+Post-production is divided into import, analysis, and product selection:
 
 ```matlab
 data = sphinx.post.importRun(result);
@@ -120,8 +154,7 @@ files = sphinx.post.produce(data,analysis, ...
 
 The importer reconstructs the wavefunction, vector and electric potentials,
 electromagnetic fields, currents, canonical momentum, and Poynting flux. It
-also round-trip verifies the solver's full-3D flattening convention before
-analysis, because axis-order bugs are not improved by optimism.
+also checks the solver's full-3D flattening convention before analysis.
 
 ```matlab
 sphinx.post.options
@@ -141,7 +174,7 @@ outputs. The editable post-production form lives at
 | [`examples/`](examples) | Runnable demonstrations and editable setup forms |
 | [`tests/`](tests) | 2D/3D API, equivalence, ordering, and analysis tests |
 | [`docs/`](docs) | User, numerical, architectural, and output documentation |
-| [`assets/`](assets) | SPHINX identity artwork |
+| [`assets/`](assets) | SPHINX artwork and project-related publication figures |
 
 ## Numerical and output contract
 
@@ -162,8 +195,7 @@ V/
 The manifest records the complete problem definition, MATLAB version, source
 revision, timestamps, storage preview, completion status, and solver diagnostics.
 Imported field histories use `[time,y,x,z]`; flat solver fields use `x` fastest,
-then `y`, then `z`, with vector components stored contiguously. It is not the
-most exciting part of the project, but it saves time later.
+then `y`, then `z`, with vector components stored contiguously.
 
 ## Validate your checkout
 
@@ -179,8 +211,8 @@ SPHINX_postproduction_test
 
 The numerical integration test compares the rolling solver with preserved
 reference maps for fixed 2D and periodic 3D runs in `EM`, `QM`, and `both`
-modes. The post-production test uses a nonsquare `5 × 4 × 3` grid so axis-order
-errors cannot hide behind a conveniently square mesh.
+modes. The post-production test uses a nonsquare `5 × 4 × 3` grid to exercise
+the axis-order convention directly.
 
 ## Documentation
 
@@ -200,3 +232,6 @@ coordinates, and normalized solver parameters without advancing the system.
 This public distribution contains the supported API and selected examples;
 historical run scripts and experiment-specific analysis are intentionally left
 out. For new work, start with the `sphinx` and `sphinx.post` interfaces.
+
+The publication figure above is reproduced from the project manuscript under
+its arXiv distribution license.
